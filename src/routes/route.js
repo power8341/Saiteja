@@ -73,5 +73,57 @@ router.get("/shoes", function(req, res){
     //req.query.brand
     res.send("dummy shoes response")
 })
+//Full array response
+router.get("/movies",function(req,res){
+    console.log(["Rang de basanti", "The shining", "Lord of the rings", "Batman begins"])
+    res.send("Movies list has been sent")
+})
+
+//
+router.get("/movies/:indexNumber",function(req,res){
+    let arr = ["Rang de basanti", "The shining", "Lord of the rings", "Batman begins"]
+    let value = parseInt(req.params.indexNumber)-1 //4
+    
+    if(value>=arr.length || value<1){
+        res.send("No movie found, use a valid list Number")
+        console.log(value>=arr.length?"req is greater":"req is lower")
+    }else{
+        console.log(arr[value])
+        res.send(`${value+1} movie in the list is ` + arr[value])
+    }
+})
+
+router.get("/film/:filmId",function(req,res){
+    let arr = [ {
+        id: 1,
+        name: "The Shining"
+       }, {
+        id: 2,
+        name: "Incendies"
+       }, {
+        id: 3,
+        name: "Rang de Basanti"
+       }, {
+        id: 4,
+        name: "Finding Nemo"
+       }]
+    //    console.log("Requested list is",req.params)
+       let ID = req.params.filmId
+       let found = "Give a valid ID as per the list"
+       let print = "Unvalid request"
+    for(let i =0;i<arr.length;i++){
+        let obj = arr[i]
+        let {id,name} = obj
+        if(ID == id){
+            found = `movie: ${name}`
+            print = arr[i]
+            // res.send(found)
+            break;
+        }
+    }
+    console.log(print)
+    res.send(found)
+       
+})
 
 module.exports = router;
