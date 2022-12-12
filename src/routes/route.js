@@ -107,10 +107,10 @@ router.get("/film/:filmId",function(req,res){
         id: 4,
         name: "Finding Nemo"
        }]
-    //    console.log("Requested list is",req.params)
+       console.log("Requested list is",req.params)
        let ID = req.params.filmId
        let found = "Give a valid ID as per the list"
-       let print = "Unvalid request"
+       let print =`Unvalid request : ${ID}`
     for(let i =0;i<arr.length;i++){
         let obj = arr[i]
         let {id,name} = obj
@@ -125,5 +125,55 @@ router.get("/film/:filmId",function(req,res){
     res.send(found)
        
 })
+
+//----------------MissingNo----------
+router.get("/sol",function(req,res){
+    let arr = [33,34,36,37]
+    let missingNo = "No missing number found"
+    let first = arr[0] 
+    for(i=0;i<arr.length;i++){
+        if(arr[i] !== first){
+            missingNo = "Missing number: "+first;
+            break;
+        }else{
+            first++
+        }
+    }
+    console.log(missingNo)
+    res.send(missingNo)
+})
+
+let arr= [1,2,3,5,6,7]
+router.get("/sol1", function(req,res){
+let total = 0;
+for (var i in arr) {
+    total += arr[i];
+}
+
+let lastDigit= arr.pop()
+let consecutiveSum= lastDigit * (lastDigit+1) / 2
+let missingNumber= consecutiveSum - total
+console.log(missingNumber)
+res.send("missing number: "+ missingNumber);
+});
+
+
+router.get("/sol2",function(req,res){
+    let arr= [33, 34, 35, 37, 38]
+let len= arr.length
+let total = 0;
+for (var i in arr) {
+    total += arr[i];
+}
+
+let firstDigit= arr[0]
+let lastDigit= arr.pop()
+let consecutiveSum= (len + 1) * (firstDigit+ lastDigit ) / 2
+let missingNumber= consecutiveSum - total
+
+res.send("Missing number is: "+ missingNumber);
+});
+
+
 
 module.exports = router;
