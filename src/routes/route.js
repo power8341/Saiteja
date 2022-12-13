@@ -71,3 +71,54 @@ router.post("/test-post-4", function(req, res) {
 })
 
 module.exports = router;
+
+
+let players =
+   [
+       {
+           "name": "manish",
+           "dob": "1/1/1995",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+           "name": "gopal",
+           "dob": "1/09/1995",
+           "gender": "male",
+           "city": "delhi",
+           "sports": [
+               "soccer"
+           ]
+       },
+       {
+           "name": "lokesh",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "mumbai",
+           "sports": [
+               "soccer"
+           ]
+       },
+   ]
+
+   router.post("/add",function(req,res){
+      let newPlayer = req.body
+      let playerName = newPlayer.name
+      let playerLength = players.length
+      let sameName = players
+      sameName.push(newPlayer)
+      for(i=0;i<playerLength;i++){
+        let found = players[i]
+        let {name} = found
+        if(name == playerName){
+            sameName = "player already exists"
+            break;
+        }
+      }
+      res.send(sameName)
+      
+      
+   })
