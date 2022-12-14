@@ -192,9 +192,9 @@ router.post( "/post-query-2", function (req, res){
     for(i=0;i<persons.length;i++){
         let obj = persons[i]
         // let {name,age,votingStatus} = obj
-        if(persons[i].age>userAge){
-            persons[i].votingStatus = true
-            votPerson.push(persons[i])
+        if(obj.age>userAge){
+            obj.votingStatus = true
+            votPerson.push(obj)
         }
     }
     res.send(votPerson)
